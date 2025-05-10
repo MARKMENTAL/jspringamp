@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload to JSpringAmp</title>
+  <style>
+    body {
+      background: linear-gradient(#2b1f3a, #1c1124);
+      color: #ffcc88;
+      font-family: 'Courier New', monospace;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #ff9944;
+      font-size: 24px;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 0 #000;
+    }
+
+    form {
+      background: #2a1a3a;
+      padding: 1.5rem;
+      border: 2px solid #ffcc88;
+      border-radius: 4px;
+      box-shadow: 0 0 10px #000;
+      width: 320px;
+    }
+
+    label {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #ffcc88;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+
+    input[type="file"] {
+      background: #3b2a4a;
+      color: #fff;
+    }
+
+    input[type="text"] {
+      background: #3b2a4a;
+      color: #ffcc88;
+    }
+
+    button {
+      background: #ff9944;
+      color: #1c1124;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: inset 0 0 4px #000;
+    }
+
+    button:hover {
+      background: #ffaa55;
+    }
+
+    #response {
+      margin-top: 1rem;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Track to JSpringAmp</h1>
+  <form id="uploadForm">
+    <label for="file">🎵 Audio File (.mp3 or .ogg)</label>
+    <input type="file" name="file" id="file" accept=".mp3,.ogg" required />
+
+    <label for="title">📝 Track Title</label>
+    <input type="text" name="title" id="title" required />
+
+    <label for="artist">🎤 Artist</label>
+    <input type="text" name="artist" id="artist" required />
+
+    <button type="submit">🚀 Upload</button>
+  </form>
+  <div id="response"></div>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    const responseBox = document.getElementById("response");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const file = document.getElementById("file").files[0];
+      const title = document.getElementById("title").value;
+      const artist = document.getElementById("artist").value;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("title", title);
+      formData.append("artist", artist);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const text = await res.text();
+      responseBox.textContent = text;
+      responseBox.style.color = res.ok ? "lightgreen" : "red";
+      if (res.ok) form.reset();
+    });
+  </script>
+</body>
+</html>
+
