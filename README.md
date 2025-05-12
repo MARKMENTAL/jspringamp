@@ -101,3 +101,21 @@ Nope. You run it. You break it. You enjoy it.
 
 ---
 
+## 🏗️ Build & CI
+
+Every push to `main` automatically triggers a GitHub Actions workflow that:
+
+- Builds JSpringAmp using Maven
+- Generates a `JSpringAmp-0.0.1-SNAPSHOT.jar` file
+- Uploads the `.jar` as an artifact for download on the [Actions tab](https://github.com/MARKMENTAL/jspringamp/actions)
+
+You can grab the latest successful build without even cloning the repo if you’re lazy or allergic to terminals.
+
+---
+
+## 🧪 Current Version
+
+`0.0.1-SNAPSHOT` — it runs, it slaps, it still might throw a stacktrace at you if you sneeze wrong.
+
+---
+
