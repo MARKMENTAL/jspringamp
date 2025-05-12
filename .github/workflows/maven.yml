@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI with Maven + Nightly Release
 
 on:
   push:
@@ -6,9 +6,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write  # Required for creating/updating releases
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -24,8 +26,12 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Upload JAR artifact
-      uses: actions/upload-artifact@v4
+    - name: Upload release JAR to GitHub Releases
+      uses: softprops/action-gh-release@v1
       with:
-        name: JSpringAmp-jar
-        path: target/JSpringAmp-0.0.1-SNAPSHOT.jar
+        tag_name: nightly
+        name: Nightly Build
+        body: "Latest automatic build from main branch."
+        files: target/JSpringAmp*.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
