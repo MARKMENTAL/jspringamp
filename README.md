@@ -101,15 +101,16 @@ Nope. You run it. You break it. You enjoy it.
 
 ---
 
-## 🏗️ Build & CI
+## 🏗️ Build & Releases
 
 Every push to `main` automatically triggers a GitHub Actions workflow that:
 
 - Builds JSpringAmp using Maven
-- Generates a `JSpringAmp-0.0.1-SNAPSHOT.jar` file
-- Uploads the `.jar` as an artifact for download on the [Actions tab](https://github.com/MARKMENTAL/jspringamp/actions)
+- Packages the latest `.jar` file (`JSpringAmp-[version].jar`)
+- Publishes or updates the [Nightly Build](https://github.com/MARKMENTAL/jspringamp/releases/tag/nightly) in the **Releases tab**
 
-You can grab the latest successful build without even cloning the repo if you’re lazy or allergic to terminals.
+You can always download the latest successful build straight from the Releases page — no need to clone, compile, or touch a terminal if you don’t want to.
+
 
 ---
 
