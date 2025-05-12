@@ -7,7 +7,7 @@ This is a **local-first**, single-user cloud music player. It plays music. It do
 
 ---
 
-## 🚀 Features (Alpha 0.1)
+## 🚀 Features (Alpha 0.0.1)
 - Upload `.mp3` or `.ogg` files via [`/upload.html`](http://localhost:8080/upload.html)
 - Tracks are saved to disk with metadata (title + artist)
 - Playback via gorgeous retro Webamp interface on [`/`](http://localhost:8080)
